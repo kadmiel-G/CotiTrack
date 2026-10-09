@@ -1,0 +1,29 @@
+```html
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CotiTrack — Accueil</title>
+</head>
+<body>
+    <h1>Bienvenue sur CotiTrack</h1>
+    <p>Ta tontine, ton argent, une transparence totale.</p>
+
+    {% if user.is_authenticated %}
+        <h2>Bonjour {{ user.username }} !</h2>
+        <p>Tu es connecté à CotiTrack.</p>
+
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Se déconnecter</button>
+        </form>
+    {% else %}
+        <p>Connecte-toi pour retrouver tes tontines.</p>
+        <p>
+            <a href="{% url 'login' %}">Se connecter</a>
+        </p>
+    {% endif %}
+</body>
+</html>
+```

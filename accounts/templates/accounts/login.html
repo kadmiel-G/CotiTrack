@@ -1,0 +1,47 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion — CotiTrack</title>
+</head>
+<body>
+    <h1>Connexion à CotiTrack</h1>
+    <p>Connecte-toi pour retrouver tes tontines.</p>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div>
+            <label for="username">Nom d'utilisateur</label>
+            <input
+                type="text"
+                id="username"
+                name="username"
+                autocomplete="username"
+                required
+            >
+        </div>
+
+        <div>
+            <label for="password">Mot de passe</label>
+            <input
+                type="password"
+                id="password"
+                name="password"
+                autocomplete="current-password"
+                required
+            >
+        </div>
+
+        {% if form.errors %}
+            <p>Identifiants incorrects. Vérifie ton nom d'utilisateur et ton mot de passe.</p>
+        {% endif %}
+
+        <button type="submit">Se connecter</button>
+    </form>
+
+    <p><a href="{% url 'home' %}">Retour à l'accueil</a></p>
+</body>
+</html>
