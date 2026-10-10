@@ -4,44 +4,328 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#087ef5">
     <title>Connexion — CotiTrack</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            padding: 24px;
+            display: grid;
+            place-items: center;
+            background: #dbe4ed;
+            color: #182638;
+            font-family: Arial, sans-serif;
+        }
+
+        .auth-card {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            width: 100%;
+            max-width: 960px;
+            min-height: 560px;
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid #dae5ec;
+            border-radius: 22px;
+            box-shadow: 0 14px 40px #17334d12;
+        }
+
+        .auth-side {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 48px 40px;
+            color: #fff;
+            background: linear-gradient(145deg, #087ef5, #0a5fb8);
+        }
+
+        .brand {
+            margin-bottom: 48px;
+            font-size: 25px;
+            font-weight: 800;
+            letter-spacing: -1px;
+        }
+
+        .brand span {
+            color: #c8e6ff;
+        }
+
+        .eyebrow {
+            margin-bottom: 16px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        h1 {
+            margin: 0 0 18px;
+            font-size: clamp(28px, 4vw, 38px);
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        .intro {
+            color: #e2f1ff;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .quote {
+            margin-top: 36px;
+            padding: 20px;
+            border: 1px solid #ffffff45;
+            border-radius: 14px;
+            background: #ffffff12;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .quote small {
+            display: block;
+            margin-top: 10px;
+            color: #d8ebff;
+        }
+
+        .auth-form {
+            align-self: center;
+            width: 100%;
+            padding: 44px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 36px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e6edf2;
+            color: #8293a2;
+            font-size: 14px;
+        }
+
+        .tabs .active {
+            color: #087ef5;
+            font-weight: 700;
+        }
+
+        h2 {
+            margin: 0 0 10px;
+            font-size: 25px;
+        }
+
+        .subtitle {
+            margin: 0 0 28px;
+            color: #738697;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .field {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 9px;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        input {
+            width: 100%;
+            min-height: 48px;
+            padding: 13px 14px;
+            border: 1px solid #dbe4ec;
+            border-radius: 10px;
+            background: #fafdff;
+            color: #182638;
+            font: inherit;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #087ef5;
+            box-shadow: 0 0 0 3px #087ef51c;
+        }
+
+        .error {
+            margin: 0 0 20px;
+            padding: 12px;
+            border-radius: 9px;
+            background: #fff0f0;
+            color: #b42318;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .submit {
+            width: 100%;
+            min-height: 50px;
+            margin-top: 8px;
+            border: 0;
+            border-radius: 10px;
+            background: #087ef5;
+            color: #fff;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .submit:hover {
+            background: #0a5fb8;
+        }
+
+        .form-note {
+            margin-top: 24px;
+            color: #738697;
+            font-size: 13px;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        a {
+            color: #087ef5;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .security {
+            margin-top: 26px;
+            padding: 13px;
+            border-radius: 10px;
+            background: #f2f8fd;
+            color: #526b80;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+        @media (max-width: 680px) {
+            body {
+                padding: 12px;
+            }
+
+            .auth-card {
+                grid-template-columns: 1fr;
+                max-width: 440px;
+            }
+
+            .auth-side {
+                padding: 28px 24px;
+            }
+
+            .brand {
+                margin-bottom: 24px;
+            }
+
+            .quote {
+                margin-top: 20px;
+            }
+
+            .auth-form {
+                padding: 30px 24px;
+            }
+
+            .tabs {
+                margin-bottom: 28px;
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Connexion à CotiTrack</h1>
-    <p>Connecte-toi pour retrouver tes tontines.</p>
+    <main class="auth-card">
+        <section class="auth-side">
+            <div class="brand">Coti<span>Track</span></div>
 
-    <form method="post">
-        {% csrf_token %}
+            <div class="eyebrow">BIENVENUE DANS COTITRACK</div>
 
-        <div>
-            <label for="username">Nom d'utilisateur</label>
-            <input
-                type="text"
-                id="username"
-                name="username"
-                autocomplete="username"
-                required
-            >
-        </div>
+            <h1>La confiance commence par une information claire.</h1>
 
-        <div>
-            <label for="password">Mot de passe</label>
-            <input
-                type="password"
-                id="password"
-                name="password"
-                autocomplete="current-password"
-                required
-            >
-        </div>
+            <p class="intro">
+                Rejoins ta tontine et garde une trace simple
+                de chaque cotisation.
+            </p>
 
-        {% if form.errors %}
-            <p>Identifiants incorrects. Vérifie ton nom d'utilisateur et ton mot de passe.</p>
-        {% endif %}
+            <div class="quote">
+                « On sait qui a enregistré quoi, quand,
+                et ce qui a été confirmé. »
+                <small>— Principe CotiTrack</small>
+            </div>
+        </section>
 
-        <button type="submit">Se connecter</button>
-    </form>
+        <section class="auth-form">
+            <div class="tabs">
+                <a href="{% url 'signup' %}">Créer un compte</a>
+                <span class="active">Se connecter</span>
+            </div>
 
-    <p><a href="{% url 'home' %}">Retour à l'accueil</a></p>
+            <h2>Content de te revoir !</h2>
+
+            <p class="subtitle">
+                Connecte-toi pour retrouver tes tontines
+                et suivre tes cotisations.
+            </p>
+
+            <form method="post">
+                {% csrf_token %}
+
+                {% if form.errors %}
+                    <p class="error" role="alert">
+                        Identifiants incorrects. Vérifie ton nom
+                        d'utilisateur et ton mot de passe.
+                    </p>
+                {% endif %}
+
+                <div class="field">
+                    <label for="username">Nom d'utilisateur</label>
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        autocomplete="username"
+                        placeholder="Ton nom d'utilisateur"
+                        required
+                    >
+                </div>
+
+                <div class="field">
+                    <label for="password">Mot de passe</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        autocomplete="current-password"
+                        placeholder="Ton mot de passe"
+                        required
+                    >
+                </div>
+
+                <button class="submit" type="submit">
+                    Se connecter →
+                </button>
+            </form>
+
+            <p class="form-note">
+                Tu n'as pas encore de compte ?
+                <a href="{% url 'signup' %}">Inscris-toi</a>
+            </p>
+
+            <div class="security">
+                🔒 Tes données sont protégées.
+                Aucun argent n'est conservé par CotiTrack.
+            </div>
+        </section>
+    </main>
 </body>
 </html>
+
+
