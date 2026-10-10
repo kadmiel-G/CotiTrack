@@ -5,3 +5,10 @@ db.sqlite3
 .env
 .env.*
 *.sqlite3
+# Node.js / NestJS
+node_modules/
+backend/dist/
+backend/coverage/
+backend/.env
+backend/.env.*
+backend/.env.example
