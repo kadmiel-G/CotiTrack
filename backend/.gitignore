@@ -1,0 +1,17 @@
+node_modules
+# Keep environment variables out of version control
+.env
+
+/generated/prisma
+
+# Fichiers temporaires et rapports locaux
+/dist
+/coverage
+*.tsbuildinfo
+audit-report.json
+
+# Guides d’assistance générés localement
+/.agents/
+/.claude/
+/.windsurf/
+/skills-lock.json
